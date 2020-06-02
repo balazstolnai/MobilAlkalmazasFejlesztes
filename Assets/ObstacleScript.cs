@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ObstacleScript : MonoBehaviour
 {
+    public GameObject player;
     private float speed = 1f;
     void Start()
     {
-        
+        player = GameObject.Find("Plane");
     }
 
     // Update is called once per frame
@@ -20,5 +21,16 @@ public class ObstacleScript : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == player.name)
+        {
+
+            PlayerControll playerScript = (PlayerControll)other.GetComponent(typeof(PlayerControll));
+            playerScript.death();
+        }
+            
     }
 }

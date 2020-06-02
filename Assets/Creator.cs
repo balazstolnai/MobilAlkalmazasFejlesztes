@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Creator : MonoBehaviour
 {
-    public GameObject topWall;
+    public GameObject topWall; //a játéktér határait jelölő falak
     public GameObject bottomWall;
     public GameObject rightWall;
     public GameObject leftWall;
 
-    public GameObject obsttacle1;
+    public GameObject obsttacle1; //a lehetséges dolgok amik jönnek (unityben hozzá kell adni)
     public GameObject obsttacle2;
 
-    private float spawnDistance = 200;
+    private int totalObstacleNumber = 2; //ennyi falyta jöhet
+
+    private GameObject[] obstacles;
+
+    private float spawnDistance = 200; //a a kezdeti távolságuk (ahnnan jönnek)
 
     private Vector3[] spawnPositions;
-    private float startSpawnTime = 4f;
-    private float endSpawnTime = 1f;
-    private float numberOfquickenings = 5f;
+    private float startSpawnTime = 4f; //ennyi másodpercenként jönnek azz elején
+    private float endSpawnTime = 1f; //ennyi másodpercenként jöbbek a végén
+    private float numberOfquickenings = 5f; //ennyi alkalommal sűrűsödik a jövetelük
 
     void Start()
     {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         float rightX = rightWall.transform.position.x;
         float leftX = leftWall.transform.position.x;
         float topY = topWall.transform.position.y;
@@ -43,6 +49,11 @@ public class Creator : MonoBehaviour
             }
         }
 
+        // obstaclök listája
+        obstacles = new GameObject[totalObstacleNumber];
+        obstacles[0] = obsttacle1;
+        obstacles[1] = obsttacle2;
+
         Invoke("startSpawning", startSpawnTime);
         
     }
@@ -64,15 +75,9 @@ public class Creator : MonoBehaviour
 
         foreach (int element in positions)
         {
-            int busz = Random.Range(0, 2);
-            if (busz == 0)
-            {
-                Instantiate(obsttacle1, spawnPositions[element], Quaternion.identity);
-            }
-            else if (busz == 1)
-            {
-                Instantiate(obsttacle2, spawnPositions[element], Quaternion.identity);
-            }
+
+            Instantiate(obstacles[Random.Range(0, totalObstacleNumber)], spawnPositions[element], Quaternion.identity);
+            
         }
         
 

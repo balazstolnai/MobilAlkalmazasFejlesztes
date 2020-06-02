@@ -7,6 +7,7 @@ public class PlayerControll : MonoBehaviour
     float speedH = 30.0f;
     public GameObject prop;
     public GameObject propBlured;
+    public GameObject explosion;
     private bool upGo = false;
     private bool downGo = false;
     Vector3 dir;
@@ -34,12 +35,12 @@ public class PlayerControll : MonoBehaviour
 
             else
             {
-                dir.z = 1;
+                dir.z = 0.7f;
             }
         }
         else if (downGo == true)
         {
-            dir.z = -1;
+            dir.z = -0.7f;
         }
         else
         {
@@ -73,6 +74,12 @@ public class PlayerControll : MonoBehaviour
     public void moveUpEnd()
     {
         upGo = false;
+    }
+
+    public void death()
+    {
+        Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
 }
