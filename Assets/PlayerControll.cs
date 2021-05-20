@@ -28,9 +28,9 @@ public class PlayerControll : MonoBehaviour
         propBlured.transform.Rotate(1000 * Time.deltaTime, 0, 0);
 
         dir.x = Input.acceleration.x;
-        if (upGo == true)
+        if (Input.GetKey(KeyCode.W) && (transform.position.z < 4))
         {
-            if (downGo == true)
+            if (Input.GetKey(KeyCode.S))
             {
                 dir.z = 0;
             }
@@ -40,7 +40,7 @@ public class PlayerControll : MonoBehaviour
                 dir.z = 0.7f;
             }
         }
-        else if (downGo == true)
+        else if (Input.GetKey(KeyCode.S) && (transform.position.z > -4))
         {
             dir.z = -0.7f;
         }
@@ -48,14 +48,32 @@ public class PlayerControll : MonoBehaviour
         {
             dir.z = 0;
         }
+        if (Input.GetKey(KeyCode.A) && (transform.position.x > -16))
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                dir.x = 0;
+            }
 
+            else
+            {
+                dir.x = -0.7f;
+            }
+        }
+        else if (Input.GetKey(KeyCode.D) && (transform.position.x < 16))
+        {
+            dir.x =0.7f;
+        }
+        else
+        {
+            dir.x= 0;
+        }
         if (dir.sqrMagnitude > 1)
             dir.Normalize();
         dir *= Time.deltaTime;
 
 
         transform.Translate(dir * speedH);
-
     }
 
     public void moveDownStart()

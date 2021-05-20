@@ -1,4 +1,2 @@
-# MobilAlkalmazasFejlesztes
-Szia!
-
-Beadandóként egy olyan 3D játékot szeretnénk elkészíteni amiben ki kell kerülni a szembe jövő akadályokat a telefon megfelelő irányba való döntésével.
+# 3DGAME
+Ötlet: Egy olyan játékot szeretnék készíteni amiben, egyelőre bizonytlan környezetben felbukkanó akadályokat kell kikerülnie a játékosnak, hogy minél tovább életben maradjon.
